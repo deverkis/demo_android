@@ -30,12 +30,12 @@ fun StatelessCounter(count: Int, onIncrement: () -> Unit, modifier: Modifier = M
  */
 @Composable
 fun StatefulCounter(modifier: Modifier = Modifier) {
-    var waterCount  by rememberSaveable {
+    var waterCount by rememberSaveable {
         mutableStateOf(0)
     }
-/*    var juiceCount   by rememberSaveable {
-        mutableStateOf(0)
-    }*/
+    /*    var juiceCount   by rememberSaveable {
+            mutableStateOf(0)
+        }*/
     StatelessCounter(count = waterCount, { waterCount++ }, modifier)
     //StatelessCounter(count = juiceCount, { juiceCount++ }, modifier)
 }
@@ -49,6 +49,8 @@ fun WaterCounter(modifier: Modifier = Modifier) {
             if (showTask) {
                 WellnessTaskItem(
                     taskName = "Have you taken your 15 minute walk today?",
+                    checked = false,
+                    onCheckedChange = {},
                     onClose = { showTask = false }
                 )
             }
