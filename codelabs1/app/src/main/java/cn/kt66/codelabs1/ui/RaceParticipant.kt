@@ -15,9 +15,13 @@
  */
 package cn.kt66.codelabs1.ui
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.delay
 
 /**
  * This class represents a state holder for race participant.
@@ -39,6 +43,18 @@ class RaceParticipant(
      */
     var currentProgress by mutableStateOf(initialProgress)
         private set
+
+    suspend fun run() {
+        try{
+            while (currentProgress < maxProgress) {
+                delay(progressDelayMillis)
+                currentProgress += progressIncrement
+            }
+        }catch (e:CancellationException){
+            Log.e("RaceParticipant", "$name: ${e.message}")
+            throw e
+        }
+    }
 
     /**
      * Regardless of the value of [initialProgress] the reset function will reset the
