@@ -19,10 +19,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-
+import androidx.lifecycle.viewModelScope
+import cn.kt66.codelabs1.network.MarsApi
+import kotlinx.coroutines.launch
+import java.io.IOException
+sealed interface MarsUiState {
+    data class Success(val photos: String) : MarsUiState
+    object Error : MarsUiState
+    object Loading : MarsUiState
+}
 class MarsViewModel : ViewModel() {
     /** The mutable State that stores the status of the most recent request */
-    var marsUiState: String by mutableStateOf("")
+    var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
         private set
 
     /**
@@ -30,6 +38,16 @@ class MarsViewModel : ViewModel() {
      */
     init {
         getMarsPhotos()
+        //uri realestate
+        //[{"price":450000,"id":"424905","type":"buy","img_src":"http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000MR0044631300503690E01_DXXX.jpg"},
+        //{"price":8000000,"id":"424906","type":"rent","img_src":"http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000ML0044631300305227E03_DXXX.jpg"}
+        //,{"price":11000000,"id":"424907","type":"rent","img_src":"http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000MR0044631290503689E01_DXXX.jpg"},{"price":8000000,"id":"424908","type":"rent","img_src":"http://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000ML0044631290305226E03_DXXX.jpg"},
+        // photos
+//         [
+//   {
+//     "id": "424905",
+//     "img_src": "https://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000MR0044631300503690E01_DXXX.jpg"
+//   },
     }
 
     /**
@@ -37,6 +55,14 @@ class MarsViewModel : ViewModel() {
      * [MarsPhoto] [List] [MutableList].
      */
     fun getMarsPhotos() {
-        marsUiState = "Set the Mars API status response here!"
+        viewModelScope.launch {
+            try{
+                val listResult = MarsApi.retrofitService.getPhotos()
+                marsUiState = MarsUiState.Success(listResult)
+            }catch (e:IOException){
+                marsUiState = MarsUiState.Error
+            }
+        }
+        //marsUiState = "Set the Mars API status response here!"
     }
 }
