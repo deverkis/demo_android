@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import cn.kt66.codelabs1.ui.MarsPhotosApp
 import cn.kt66.codelabs1.ui.RaceTrackerApp
 import cn.kt66.codelabs1.ui.theme.Codelabs1Theme
 import kotlinx.coroutines.Deferred
@@ -34,7 +35,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //WellnessScreen()
                     //MyApp()
-                    RaceTrackerApp()
+                    //RaceTrackerApp()
+                    MarsPhotosApp()
                 }
             }
         }
@@ -111,6 +113,7 @@ suspend fun getTemperature(): String {
 fun GreetingPreview() {
     Codelabs1Theme {
         //WellnessScreen()
-        RaceTrackerApp()
+        //RaceTrackerApp()
+        MarsPhotosApp()
     }
 }
