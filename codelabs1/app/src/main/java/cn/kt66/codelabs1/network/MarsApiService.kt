@@ -1,18 +1,20 @@
 package cn.kt66.codelabs1.network
 
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 
-private const val BASE_URL = "http://10.10.8.66/"
+private const val BASE_URL = "http://manager.ht.lhkj2022.com/noci/"
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(ScalarsConverterFactory.create())
+    .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
     .baseUrl(BASE_URL)
     .build()
 
 interface MarsApiService {
-    @GET("photos.php")
-    suspend fun getPhotos(): String
+    @GET("test8.php")
+    suspend fun getPhotos():List<MarsPhoto>
 }
 
 object MarsApi {
