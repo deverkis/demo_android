@@ -160,6 +160,9 @@ fun unit2Test2() {
 
 @Composable
 fun UnitTest3() {
+    var amountInput by remember { mutableStateOf("") }
+    val amount = amountInput.toDoubleOrNull() ?: 0.0
+    val tip = calculateTip(amount)
     Column(
         modifier = Modifier
             .statusBarsPadding()
@@ -175,22 +178,38 @@ fun UnitTest3() {
                 .align(alignment = Alignment.Start)
         )
         EditNumberField(
+            value = amountInput,
+            onValueChange = { amountInput = it },
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth()
         )
         Text(
-            text = stringResource(R.string.tip_amount, "$0.00"),
+            text = stringResource(R.string.tip_amount, tip),
             style = MaterialTheme.typography.displaySmall
         )
         Spacer(modifier = Modifier.height(150.dp))
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun EditNumberField(value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        singleLine = true,
+        label = { Text(stringResource(id = R.string.bill_amount)) },
+        modifier = modifier,
+        //将键盘类型设置为数字键盘即可输入数字
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+    )
+}
+
 @SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditNumberField(modifier: Modifier = Modifier) {
+fun EditNumberFieldOld(modifier: Modifier = Modifier) {
     //val amountInput="0"
     //您需要依赖名为“重组”的进程来更新应用的组合。
     //而 MutableState 类型是可变的。可以使用 mutableStateOf() 函数来创建可观察的 MutableState。

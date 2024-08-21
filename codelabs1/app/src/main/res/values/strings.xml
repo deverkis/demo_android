@@ -17,7 +17,7 @@
     <string name="app_name">Race tracker</string>
     <string name="calculate_tip">Calculate Tip</string>
     <string name="bill_amount">Bill Amount</string>
-    <string name="tip_amount">Tip Amount</string>
+    <string name="tip_amount">Tip Amount:%s</string>
     <string name="roll">Roll</string>
     <string name="run_a_race">Run a race</string>
     <string name="pause">Pause</string>
