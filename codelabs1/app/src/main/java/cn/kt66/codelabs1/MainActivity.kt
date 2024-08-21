@@ -351,6 +351,16 @@ class Quiz : ProgressPrintable {
         println(progressText)
     }
 
+    fun printQuiz(){
+//        println(q1.questionText)
+////        println(q1.answer)
+        //使用 let() 替换过长的对象名称
+        q1.let {
+            println(it.questionText)
+            println(it.answer)
+        }
+    }
+
     val q1 = Question<String>("a", "b", Difficulty.HARD)
     val q2 = Question<Boolean>("bb", false, Difficulty.EASY)
 
@@ -381,6 +391,12 @@ fun Unit3Test1() {
     //println(Quiz.progressText)
     //Quiz.printProgressBar()
     Quiz().printProgressBar()
+    val quiz = Quiz()
+    quiz.printQuiz()
+    //使用 apply() 在没有变量的情况下调用对象方法
+    Quiz().apply {
+        printQuiz()
+    }
 }
 
 //使用枚举常量
