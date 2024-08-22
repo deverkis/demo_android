@@ -59,6 +59,7 @@ fun Unit3Test4() {
     test1()
     test2()
     test3()
+    test6()
 }
 
 fun test1() {
@@ -125,5 +126,11 @@ fun test5() {
 
 fun test6(){
     //sortedBy() 您可以指定一个 lambda 以返回作为排序依据的属性。
-    val alphabeticalMenu = cookies.sortedBy {}
+    val alphabeticalMenu = cookies.sortedBy {
+        it.name
+    }
+    println("Alphabetical menu:")
+    alphabeticalMenu.forEach {
+        println(it.name)
+    }
 }
