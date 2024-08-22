@@ -1,5 +1,6 @@
 package cn.kt66.codelabs1
 
+import Unit3Test4
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -50,7 +51,7 @@ class MainActivity : ComponentActivity() {
                     // unit2Test2()
                     //Unit2Test3()
                     //Unit3Test1()
-                    Unit3Test3()
+                    Unit3Test4()
                 }
             }
         }
@@ -159,6 +160,6 @@ fun GreetingPreview() {
         //MarsPhotosApp()
         //Unit2Test3()
         //Unit3Test1()
-        Unit3Test3()
+        Unit3Test4()
     }
 }
