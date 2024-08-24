@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.affirmations.data
+package cn.kt66.codelabs1.data
 
 import cn.kt66.codelabs1.R
 import cn.kt66.codelabs1.model.Affirmation

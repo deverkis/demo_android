@@ -25,7 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import cn.kt66.codelabs1.R
 import cn.kt66.codelabs1.model.Affirmation
-import com.example.affirmations.data.Datasource
+import cn.kt66.codelabs1.data.Datasource
 
 @Composable
 fun Unit3Test21() {
