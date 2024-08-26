@@ -51,6 +51,8 @@ android {
 }
 
 dependencies {
+    // icons
+    implementation("androidx.compose.material:material-icons-extended")
     // Kotlin serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
     //Retrofit
