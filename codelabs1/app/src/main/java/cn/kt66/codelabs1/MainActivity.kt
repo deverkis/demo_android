@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    Codelabs1Theme(darkTheme = false) {
+    Codelabs1Theme(darkTheme = true) {
         //WellnessScreen()
         //RaceTrackerApp()
         //MarsPhotosApp()
