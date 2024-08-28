@@ -58,6 +58,7 @@ fun Unit4Test1() {
     //onResume 将应用置于前台，用户现在可以与应用交互。
     //onPause 当该 activity 失去焦点时，
     DessertClickerApp(desserts = DataDessert.dessertList)
+    //屏幕旋转,onPause - onStop - onDestroy - onCreate - onStart - onResume
 }
 
 fun determineDessertToShow(
@@ -108,6 +109,11 @@ private fun shareSoldDessertsInformation(intentContext: Context, dessertsSold: I
 private fun DessertClickerApp(
     desserts: List<Dessert>
 ) {
+
+    //如需创建可变变量 revenue，请使用 mutableStateOf 声明该变量。0 是它的初始默认值。
+    //如需指示 Compose 在重组期间保留并重复使用其值，您需要使用 remember API 进行声明。
+    //尽管 Compose 会在重组期间记住收入状态，但在配置变更期间不会保留此状态。为了让 Compose 在配置更改期间保留状态，您必须使用 rememberSaveable。
+
 
     var revenue by rememberSaveable { mutableStateOf(0) }
     var dessertsSold by rememberSaveable { mutableStateOf(0) }
