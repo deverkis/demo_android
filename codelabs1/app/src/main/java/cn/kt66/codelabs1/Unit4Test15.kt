@@ -40,8 +40,9 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -53,12 +54,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import cn.kt66.codelabs1.ui.GameViewModel
 import cn.kt66.codelabs1.ui.theme.Codelabs1Theme
 
 @Composable
 fun Unit4Test15() {
-    val mediumPadding = dimensionResource(R.dimen.padding_medium)
+    GameScreen()
+}
 
+@Composable
+fun GameScreen(gameViewModel: GameViewModel = viewModel()) {
+    val mediumPadding = dimensionResource(R.dimen.padding_medium)
+    val gameUiState by gameViewModel.uiState.collectAsState()
     Column(
         modifier = Modifier
             .statusBarsPadding()
@@ -74,6 +82,9 @@ fun Unit4Test15() {
             style = typography.titleLarge,
         )
         GameLayout(
+            onUserGuessChanged = { gameViewModel.updateUserGuess(it) },
+            userGuess = gameViewModel.userGuess,
+            currentScrambledWord = gameUiState.currentScrambleWord,
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
@@ -89,7 +100,7 @@ fun Unit4Test15() {
 
             Button(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { }
+                onClick = { gameViewModel.checkUserGuess() }
             ) {
                 Text(
                     text = stringResource(R.string.submit),
@@ -127,7 +138,11 @@ fun GameStatus(score: Int, modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GameLayout(modifier: Modifier = Modifier) {
+fun GameLayout(
+    onUserGuessChanged: (String) -> Unit,
+    userGuess: String,
+    currentScrambledWord: String, modifier: Modifier = Modifier
+) {
     val mediumPadding = dimensionResource(R.dimen.padding_medium)
 
     Card(
@@ -150,7 +165,7 @@ fun GameLayout(modifier: Modifier = Modifier) {
                 color = colorScheme.onPrimary
             )
             Text(
-                text = "scrambleun",
+                text = currentScrambledWord,
                 style = typography.displayMedium
             )
             Text(
@@ -159,11 +174,11 @@ fun GameLayout(modifier: Modifier = Modifier) {
                 style = typography.titleMedium
             )
             OutlinedTextField(
-                value = "",
+                value = userGuess,
                 singleLine = true,
                 shape = shapes.large,
                 modifier = Modifier.fillMaxWidth(),
-                onValueChange = { },
+                onValueChange = onUserGuessChanged,
                 label = { Text(stringResource(R.string.enter_your_word)) },
                 isError = false,
                 keyboardOptions = KeyboardOptions.Default.copy(
@@ -218,6 +233,6 @@ private fun FinalScoreDialog(
 @Composable
 fun GameScreenPreview() {
     Codelabs1Theme {
-        Unit4Test15()
+        GameScreen()
     }
 }
