@@ -52,11 +52,9 @@ class GameViewModel : ViewModel() {
 
     fun updateUserGuess(value: String) {
         userGuess = value
-        Log.e("updateUserGuess", value)
     }
 
     fun checkUserGuess() {
-        Log.e("checkUserGuess", userGuess)
         if (userGuess.equals(currentWord, ignoreCase = true)) {
             val updatedScore = _uiState.value.score.plus(SCORE_INCREASE) // 得分 + 20
             updateGameState(updatedScore)
@@ -96,7 +94,6 @@ class GameViewModel : ViewModel() {
     }
 
     fun skipWorld() {
-        Log.e("GameViewModel", "skipWorld")
         updateGameState(_uiState.value.score)
         updateUserGuess("") // 清除用户的输入
     }
