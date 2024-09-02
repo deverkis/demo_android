@@ -15,6 +15,9 @@
  */
 package cn.kt66.codelabs1
 
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,12 +32,34 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import cn.kt66.codelabs1.data.DataCupcake
 import cn.kt66.codelabs1.ui.OrderViewModel
+import cn.kt66.codelabs1.ui.SelectOptionScreen
+import cn.kt66.codelabs1.ui.StartOrderScreen
 
+@Composable
+fun UnitTest2() {
+    // Navigation 组件有三个主要部分：
+
+    // NavController：负责在目标页面（即应用中的屏幕）之间导航。
+    // NavGraph：用于映射要导航到的可组合项目标页面。
+    // NavHost：此可组合项充当容器，用于显示 NavGraph 的当前目标页面。
+}
+
+enum class CupcakeScreen() {
+    Start,
+    Flavor,
+    Pickup,
+    Summary,
+}
 
 /**
  * Composable that displays the topBar and displays back button if back navigation is possible.
@@ -81,6 +106,37 @@ fun CupcakeApp(
         }
     ) { innerPadding ->
         val uiState by viewModel.uiState.collectAsState()
+        NavHost(
+            navController = navController,
+            startDestination = CupcakeScreen.Start.name,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            //您将针对这四个路线分别调用一次 composable() 函数。
+            composable(route = CupcakeScreen.Start.name) {
+                StartOrderScreen(
+                    quantityOptions = DataCupcake.quantityOptions,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(dimensionResource(id = R.dimen.padding_medium))
+                )
+            }
+            composable(route = CupcakeScreen.Flavor.name) {
+                val context = LocalContext.current
+                SelectOptionScreen(
+                    subtotal = uiState.price,
+                    options = DataCupcake.flavors.map { id -> context.resources.getString(id) },
+                    onSelectionChanged = { viewModel.setFlavor(it) },
+                    modifier = Modifier.fillMaxHeight(),
+            }
 
+            composable(route = CupcakeScreen.Pickup.name) {
+                val context = LocalContext.current
+                SelectOptionScreen(
+                    subtotal = uiState.price,
+                    options = uiState.pickupOptions,
+                    onSelectionChanged = { viewModel.setDate(it) },
+                    modifier = Modifier.fillMaxHeight(),
+            }
+        }
     }
 }
