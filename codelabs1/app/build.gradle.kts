@@ -51,6 +51,8 @@ android {
 }
 
 dependencies {
+    //navigation
+    implementation("androidx.navigation:navigation-compose:2.7.4")
     //viewmodel
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
     // icons
