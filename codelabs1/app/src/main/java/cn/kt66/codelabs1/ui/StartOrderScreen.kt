@@ -49,6 +49,7 @@ import cn.kt66.codelabs1.ui.theme.Codelabs1Theme
 @Composable
 fun StartOrderScreen(
     quantityOptions: List<Pair<Int, Int>>,
+    onNextButtonClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -83,7 +84,7 @@ fun StartOrderScreen(
             quantityOptions.forEach { item ->
                 SelectQuantityButton(
                     labelResourceId = item.first,
-                    onClick = {}
+                    onClick = {onNextButtonClicked(item.second)}
                 )
             }
         }
@@ -114,6 +115,7 @@ fun StartOrderPreview() {
     Codelabs1Theme {
         StartOrderScreen(
             quantityOptions = DataCupcake.quantityOptions,
+            onNextButtonClicked = {},
             modifier = Modifier
                 .fillMaxSize()
                 .padding(dimensionResource(R.dimen.padding_medium))
