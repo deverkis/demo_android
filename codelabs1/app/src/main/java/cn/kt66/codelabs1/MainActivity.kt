@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     // unit2Test2()
                     //Unit2Test3()
                     //Unit3Test1()
-                    Unit4Test1()
+                    Unit4Test2()
                 }
             }
         }
@@ -81,6 +81,6 @@ fun GreetingPreview() {
         //MarsPhotosApp()
         //Unit2Test3()
         //Unit3Test1()
-        Unit4Test1()
+        Unit4Test2()
     }
 }

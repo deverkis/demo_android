@@ -41,12 +41,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import cn.kt66.codelabs1.data.DataCupcake
+import cn.kt66.codelabs1.ui.OrderSummaryScreen
 import cn.kt66.codelabs1.ui.OrderViewModel
 import cn.kt66.codelabs1.ui.SelectOptionScreen
 import cn.kt66.codelabs1.ui.StartOrderScreen
 
 @Composable
-fun UnitTest2() {
+fun Unit4Test2() {
+    CupcakeApp()
     // Navigation 组件有三个主要部分：
 
     // NavController：负责在目标页面（即应用中的屏幕）之间导航。
@@ -126,7 +128,8 @@ fun CupcakeApp(
                     subtotal = uiState.price,
                     options = DataCupcake.flavors.map { id -> context.resources.getString(id) },
                     onSelectionChanged = { viewModel.setFlavor(it) },
-                    modifier = Modifier.fillMaxHeight(),
+                    modifier = Modifier.fillMaxHeight()
+                )
             }
 
             composable(route = CupcakeScreen.Pickup.name) {
@@ -135,7 +138,15 @@ fun CupcakeApp(
                     subtotal = uiState.price,
                     options = uiState.pickupOptions,
                     onSelectionChanged = { viewModel.setDate(it) },
-                    modifier = Modifier.fillMaxHeight(),
+                    modifier = Modifier.fillMaxHeight()
+                )
+            }
+
+            composable(route = CupcakeScreen.Summary.name) {
+                OrderSummaryScreen(
+                    orderUiState = uiState,
+                    modifier = Modifier.fillMaxHeight()
+                )
             }
         }
     }
