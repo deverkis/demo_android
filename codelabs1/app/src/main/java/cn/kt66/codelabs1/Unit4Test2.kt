@@ -105,7 +105,7 @@ fun CupcakeApp(
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen =
-        CupcakeScreen.valueOf(backStackEntry?.destination.route ?: CupcakeScreen.Start.name)
+        CupcakeScreen.valueOf(backStackEntry?.destination?.route ?: CupcakeScreen.Start.name)
 
     Scaffold(
         topBar = {
@@ -114,7 +114,7 @@ fun CupcakeApp(
                 //只要返回堆栈中的当前屏幕后面还有屏幕，系统就会显示向上按钮
                 canNavigateBack = navController.previousBackStackEntry != null,
                 //实际返回上一个屏幕
-                navigateUp = { navController.navigateUp()}
+                navigateUp = { navController.navigateUp() }
             )
         }
     ) { innerPadding ->
