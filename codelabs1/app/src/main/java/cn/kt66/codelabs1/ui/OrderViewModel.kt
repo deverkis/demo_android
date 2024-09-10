@@ -116,3 +116,7 @@ class OrderViewModel : ViewModel() {
         return dateOptions
     }
 }
+
+fun Double.formatPrice(): String {
+    return NumberFormat.getCurrencyInstance().format(this)
+}

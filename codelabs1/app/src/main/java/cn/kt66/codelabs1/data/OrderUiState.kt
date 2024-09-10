@@ -15,6 +15,8 @@
  */
 package cn.kt66.codelabs1.data
 
+import cn.kt66.codelabs1.model.MenuItem
+
 /**
  * Data class that represents the current UI state in terms of [quantity], [flavor],
  * [dateOptions], selected pickup [date] and [price]
@@ -29,5 +31,12 @@ data class OrderUiState(
     /** Total price for the order */
     val price: String = "",
     /** Available pickup dates for the order*/
-    val pickupOptions: List<String> = listOf()
+    val pickupOptions: List<String> = listOf(),
+
+    val entree: MenuItem.EntreeItem? = null,
+    val sideDish: MenuItem.SideDishItem? = null,
+    val accompaniment: MenuItem.AccompanimentItem? = null,
+    val itemTotalPrice: Double = 0.0,
+    val orderTax: Double = 0.0,
+    val orderTotalPrice: Double = 0.0
 )
