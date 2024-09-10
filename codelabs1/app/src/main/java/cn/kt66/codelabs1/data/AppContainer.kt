@@ -9,15 +9,15 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 
 interface AppContainer {
-    val marsPhotoRespository: MarsPhotoRespository
+    val marsPhotosRepository: MarsPhotoRespository
 }
 
 class DefaultAppContainer() : AppContainer {
 
-    override val marsPhotoRespository: MarsPhotoRespository by lazy {
+    override val marsPhotosRepository: MarsPhotoRespository by lazy {
         NetworkMarsPhotosRepository(retrofitService)
     }
-    private val BASE_URL = ""
+    private val BASE_URL = "https://"
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(Json.asConverterFactory(("application/json".toMediaType())))
         .baseUrl(BASE_URL)

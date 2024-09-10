@@ -36,6 +36,7 @@ import cn.kt66.codelabs1.R
 import cn.kt66.codelabs1.ui.screens.HomeScreen
 import cn.kt66.codelabs1.ui.screens.MarsViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MarsPhotosApp() {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -46,7 +47,7 @@ fun MarsPhotosApp() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            val marsViewModel: MarsViewModel = viewModel()
+            var marsViewModel:MarsViewModel = viewModel(factory = MarsViewModel.Factory)
             HomeScreen(
                 marsUiState = marsViewModel.marsUiState,
                 contentPadding = it,
