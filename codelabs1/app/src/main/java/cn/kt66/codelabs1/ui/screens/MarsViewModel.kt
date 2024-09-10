@@ -15,19 +15,21 @@
  */
 package cn.kt66.codelabs1.ui.screens
 
+import NetworkMarsPhotosRepository
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cn.kt66.codelabs1.network.MarsApi
 import kotlinx.coroutines.launch
 import java.io.IOException
+
 sealed interface MarsUiState {
     data class Success(val photos: String) : MarsUiState
     object Error : MarsUiState
     object Loading : MarsUiState
 }
+
 class MarsViewModel : ViewModel() {
     /** The mutable State that stores the status of the most recent request */
     var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
@@ -56,11 +58,16 @@ class MarsViewModel : ViewModel() {
      */
     fun getMarsPhotos() {
         viewModelScope.launch {
-            try{
-                val listResult = MarsApi.retrofitService.getPhotos()
-               // marsUiState = MarsUiState.Success(listResult)
-               marsUiState = MarsUiState.Success("Success:${listResult.size} Mars photos retrieved")
-            }catch (e:IOException){
+            try {
+                //将“val listResult = MarsApi.retrofitService.getPhotos()”行替换为以下代码：
+                //val listResult = MarsApi.retrofitService.getPhotos()
+                //仓库将提供数据，而不是由 ViewModel 直接发出关于数据的网络请求。ViewModel 不再直接引用 MarsApi 代码。
+                val marsPhotoRespository = NetworkMarsPhotosRepository(restrofitService)
+                val listResult = marsPhotoRespository.getMarsPhotos()
+                // marsUiState = MarsUiState.Success(listResult)
+                marsUiState =
+                    MarsUiState.Success("Success:${listResult.size} Mars photos retrieved")
+            } catch (e: IOException) {
                 marsUiState = MarsUiState.Error
             }
         }
