@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import cn.kt66.codelabs1.ui.theme.Codelabs1Theme
 import cn.kt66.codelabs1.Unit4Test4
+import cn.kt66.codelabs1.ui.MarsPhotosApp
 
 class MainActivity : ComponentActivity() {
     private val TAG = "MainActivity"
@@ -32,11 +33,11 @@ class MainActivity : ComponentActivity() {
                     //WellnessScreen()
                     //MyApp()
                     //RaceTrackerApp()
-                    //MarsPhotosApp()
+                    MarsPhotosApp()
                     // unit2Test2()
                     //Unit2Test3()
                     //Unit3Test1()
-                    Unit4Test4()
+                    //Unit4Test4()
                 }
             }
         }
@@ -79,9 +80,9 @@ fun GreetingPreview() {
     Codelabs1Theme(darkTheme = true) {
         //WellnessScreen()
         //RaceTrackerApp()
-        //MarsPhotosApp()
+        MarsPhotosApp()
         //Unit2Test3()
         //Unit3Test1()
-        Unit4Test4()
+        //Unit4Test4()
     }
 }

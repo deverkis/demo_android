@@ -17,7 +17,7 @@ class DefaultAppContainer() : AppContainer {
     override val marsPhotosRepository: MarsPhotoRespository by lazy {
         NetworkMarsPhotosRepository(retrofitService)
     }
-    private val BASE_URL = "https://"
+    private val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com/"
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(Json.asConverterFactory(("application/json".toMediaType())))
         .baseUrl(BASE_URL)

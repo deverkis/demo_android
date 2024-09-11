@@ -13,7 +13,7 @@ android {
         minSdk = 29
         targetSdk = 34
         versionCode = 1
-        versionName = "1.2"
+        versionName = "1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -51,6 +51,8 @@ android {
 }
 
 dependencies {
+    //
+    implementation("io.coil-kt:coil-compose:2.4.0")
     //navigation
     implementation("androidx.navigation:navigation-compose:2.7.4")
     //viewmodel
